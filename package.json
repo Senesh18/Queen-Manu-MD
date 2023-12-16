@@ -1,7 +1,7 @@
 {
-    "name": "Queen-Manu",
+    "name": "a17",
     "version": "1.0.0",
-    "description": "Queen-Manu is a WhatsApp multiDevice Bot based on Senuwa & Sachith written in Javascript.",
+    "description": "A17 is a WhatsApp multiDevice Bot based on Miku and Baileys written in Javascript.",
     "main": "index.js",
     "directories": {
         "lib": "lib"
@@ -12,17 +12,17 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Senesh18/Queen-Manu-MD.git"
+        "url": "git+https://github.com/Kai0071/A17.git"
     },
     "keywords": [
         "md-bot"
     ],
-    "author": "Senuwa",
+    "author": "Kai",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/Senesh18/Queen-Manu-MD/issues"
+        "url": "https://github.com/Kai0071/A17/issues"
     },
-    "homepage": "https://github.com/Senesh18/Queen-Manu-MD#readme",
+    "homepage": "https://github.com/Kai0071/A17#readme",
     "devDependencies": {
         "@adiwajshing/keyed-db": "^0.2.4",
         "@hapi/boom": "^10.0.1",
