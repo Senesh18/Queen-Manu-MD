@@ -64,15 +64,6 @@
 
 <br>
 <br>
-<h2 align="left"> 🔥 Deploy On Railway 🔥 </h2>
-
-<h2 align="left">
-  <a href="https://railway.app/new">
-    <img title="Bot on Railway" src="https://railway.app/button.svg" />
-  </a>
-</h2>
-<br>
-<br>
 <h2 align="left"> 🔥 Deploy On Heroku 🔥 </h2>
 
 <p align="left">
