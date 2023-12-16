@@ -43,9 +43,9 @@
 
 <br>
 <br>
-<h2 align="center"> 🎀 Tap Here To Fork 🎀 </h2>
+<h2 align="left"> Tap Here To Fork 👇</h2>
 
-<h2 align="center">
+<h2 align="left">
   <a href="https://github.com/Senesh18/Queen-Manu-MD/fork">
     <img src="https://img.shields.io/badge/FORK QUEEN MANU-h?color=white&style=for-the-badge&logo=stackshare" />
   </a>
@@ -54,9 +54,9 @@
 <br>
 <br>
 
-<h2 align="center"> 🎀  Run Repl For Get Season File 🎀 </h2>
+<h2 align="left"> Run Repl For Get Season File 👇</h2>
 
-<h2 align="center">
+<h2 align="left">
   <a href="https://replit.com/@seneshshashmika/Queen-Manu-Pair-Code?v=1">
     <img src="https://repl.it/badge/github/quiec/whatsasena" />
   </a>
@@ -64,7 +64,7 @@
 
 <br>
 <br>
-<h2 align="center"> 🎀  Deploy On Railway  🎀 </h2>
+<h2 align="center"> 🔥 Deploy On Railway 🔥 </h2>
 
 <h2 align="center">
   <a href="https://railway.app/new">
@@ -73,7 +73,7 @@
 </h2>
 <br>
 <br>
-<h2 align="center"> 🎀  Deploy On Heroku  🎀 </h2>
+<h2 align="center"> 🔥 Deploy On Heroku 🔥 </h2>
 
 <p align="center">
   <a href="https://heroku.com/deploy?template=https://github.com/Senesh18/Queen-Manu-MD">
