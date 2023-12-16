@@ -6,7 +6,7 @@
 
 <p align="center">
    <a href="https://github.com/Senesh18">
-    <img src="https://graph.org/file/14d7cc038fa3192a8fe43.jpg" width="249">
+    <img src="https://ibb.co/RBDfPgB" width="249">
 </p>
 
 <h1 align="center"> Mr Senuwa Modz </h1>
