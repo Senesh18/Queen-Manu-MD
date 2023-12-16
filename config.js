@@ -8,7 +8,7 @@ global.autoReadAll = false;
 global.antitags = true;
 
 
-//auto functioner කැමති නම් වෙනස් කරගන්න...
+//auto functioner
 global.autoTyping = false;                //auto tying by default off.
 global.autoRecord = false;                //auto recording by default off.
 global.groupevent = false;                //This is the new variable for controlling group event handling.
@@ -21,19 +21,19 @@ global.prefa = ["."];                                    //Default prefix here. 
 
 
 //
-global.Owner = ["Mr Senuwa", "Senesh Shashmika"];         //නම් , නම්බර් වෙනස් කරගන්න...
-global.OwnerNumber = ["94713106474", "94762537450"];   //මේවත් වෙනස් කරගන්න..
-global.ownertag = ["94713106474"];
-global.OwnerName = "Mr Senuwa";
-global.BotName = "Queen-Manu-MD";
-global.packname = "Queen-Manu";                             //වෙනස් කරන්න එපා...
-global.author = "By Senesh";                               //වෙනස් කරන්න එපා..
-global.BotSourceCode = "https://github.com/Senesh18/Queen-Manu-MD"; //වෙනස් කරන්න එපා..
-global.SupportGroupLink = "https://chat.whatsapp.com/EN9JD9fDeQa7s6jaYOTjZK";
+global.Owner = ["916297175943", "919362639362"];         //If you want singal number so global.Owner = ['916297175943'] Change into your number.
+global.OwnerNumber = ["916297175943", "919362639362"];   //If you want singal number so global.Owner = ['916297175943'] Change into your number.
+global.ownertag = ["916297175943"];
+global.OwnerName = "Kai";
+global.BotName = "A17";
+global.packname = "A17 Bot";                             //Do not change.
+global.author = "By: Kai";                               //Do not change.
+global.BotSourceCode = "https://github.com/Kai0071/A17"; //Do not change.
+global.SupportGroupLink = "https://chat.whatsapp.com/GhRGdwfaMVDCoeAdzILfl";
 
 
 //
-global.sessionName = "session";                          //වෙනස් කරන්නෙපා මේවා...👈👇
+global.sessionName = "session";                          //Do not change.
 
 
 //
@@ -41,12 +41,12 @@ global.openAiAPI = "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";
 
 
 //
-global.location = "Matara , Sri Lanka";
-global.reactmoji = "🙃️";
-global.themeemoji = "🧚‍♀️";
+global.location = "Tata City, India";
+global.reactmoji = "❤️";
+global.themeemoji = "💖";
 global.vidmenu = { url: 'https://media.tenor.com/Jdu0Ov8X2sIAAAAC/A17-Bot.mp4' };
-global.websitex = "https://github.com/Senesh18";
-global.lolhuman = "SenuwaH";
+global.websitex = "https://github.com/Kai0071";
+global.lolhuman = "KaysaS";
 
 
 //
