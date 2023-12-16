@@ -1,4 +1,4 @@
-<h1 align="center"> 🧚‍♀️ Queen Manu-MD Bot </h1>
+<h1 align="center"> 🧚‍♀️ Queen Manu-MD Bot 🧚‍♀️ </h1>
 
 <p align="center">
   <img src="https://readme-typing-svg.demolab.com?font=Capriola&size=40&duration=4000&pause=450&color=FF0010&background=FFFFAA00&center=true&random=false&width=600&height=100&lines=Queen+Manu+MD+Bot+!;Developed+By+Mr+Senuwa+!" />
