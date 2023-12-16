@@ -1,7 +1,7 @@
 {
-    "name": "Queen Manu",
+    "name": "Queen-Manu",
     "version": "1.0.0",
-    "description": "Queen Manu is a WhatsApp multiDevice Bot based on Senuwa & Sachith written in Javascript.",
+    "description": "Queen-Manu is a WhatsApp multiDevice Bot based on Senuwa & Sachith written in Javascript.",
     "main": "index.js",
     "directories": {
         "lib": "lib"
