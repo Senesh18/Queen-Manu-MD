@@ -1,8 +1,8 @@
 {
-  "name": "Queen Manu-MD",
+  "name": "Queen-Manu-MD",
   "description": "A WhatsApp bot based on Baileysjs library (Ts+Js) with Multi Device support",
   "repository": "https://github.com/Senesh18/Queen-Manu-MD",
-  "logo": "https://wallpapercave.com/w/uwp3580267",
+  "logo": "https://wallpapercave.com/wp/wp6471201.jpg",
   "keywords": ["nodejs", "bot", "whatsapp bot", "whatsapp automation", "multi device"],
   "buildpacks": [
     {
