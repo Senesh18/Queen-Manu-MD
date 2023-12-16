@@ -1,6 +1,6 @@
 require("./config.js");
 const {
-  default: QueenManuConnect,
+  default: A17Connect,
   useMultiFileAuthState,
   DisconnectReason,
   fetchLatestBaileysVersion,
@@ -48,10 +48,10 @@ const store = makeInMemoryStore({
   logger: pino().child({ level: "silent", stream: "store" }),
 });
 
-async function startQueenManu() {
+async function startA17() {
   console.log(
     color(
-      figlet.textSync("QueenManu Bot MD", {
+      figlet.textSync("A17 Bot MD", {
         font: "Standard",
         horizontalLayout: "default",
         vertivalLayout: "default",
@@ -62,29 +62,29 @@ async function startQueenManu() {
       "green"
     )
   );
-  console.log(color('\nHello, I am Senuwa, the main Developer of this bot.\n\nThanks for using: QueenManu Bot.🙃❤️', 'aqua'))
-  console.log(color('\nYou can follow me on GitHub: Senesh18', 'aqua'))
+  console.log(color('\nHello, I am Kai, the main Developer of this bot.\n\nThanks for using: A17 Bot.', 'aqua'))
+  console.log(color('\nYou can follow me on GitHub: Kai0071', 'aqua'))
 
-  const { state, saveCreds } = await useMultiFileAuthState("./QueenManu-SESSION");
-  const QueenManu = QueenManuConnect({
+  const { state, saveCreds } = await useMultiFileAuthState("./A17-SESSION");
+  const A17 = A17Connect({
     logger: pino({ level: "silent" }),
     printQRInTerminal: true,
     browser: ["A17 Bot", "Safari", "3.O"],
     auth: state,
   });
 
-  store.bind(QueenManu.ev);
+  store.bind(A17.ev);
 
 
  //
-  QueenManu.ws.on('CB:call', async (json) => {
+  A17.ws.on('CB:call', async (json) => {
     const callerId = json.content[0].attrs['call-creator']
     if (json.content[0].tag === 'offer') {
       try {
-        let contactMessage = await QueenManu.sendContact(callerId, global.Owner)
-        await QueenManu.sendMessage(callerId, { text: `Automatic Block System!\nDo not call this number!\nPlease unblock this number with permission from the Bot Owner.` }, { quoted: contactMessage })
+        let contactMessage = await A17.sendContact(callerId, global.Owner)
+        await A17.sendMessage(callerId, { text: `Automatic Block System!\nDo not call this number!\nPlease unblock this number with permission from the Bot Owner.` }, { quoted: contactMessage })
         await sleep(8000)
-        await QueenManu.updateBlockStatus(callerId, "block")
+        await A17.updateBlockStatus(callerId, "block")
       } catch (error) {
         console.error(error)
       }
@@ -92,7 +92,7 @@ async function startQueenManu() {
   })
 
 
-  QueenManu.ev.on("messages.upsert", async (chatUpdate) => {
+  A17.ev.on("messages.upsert", async (chatUpdate) => {
     try {
       mek = chatUpdate.messages[0];
       if (!mek.message) return;
@@ -101,11 +101,11 @@ async function startQueenManu() {
           ? mek.message.ephemeralMessage.message
           : mek.message;
       if (mek.key && mek.key.remoteJid === "status@broadcast") return;
-      if (!QueenManu.public && !mek.key.fromMe && chatUpdate.type === "notify")
+      if (!A17.public && !mek.key.fromMe && chatUpdate.type === "notify")
         return;
       if (mek.key.id.startsWith("BAE5") && mek.key.id.length === 16) return;
-      m = smsg(QueenManu, mek, store);
-      require("./Core")(QueenManu, m, chatUpdate, store);
+      m = smsg(A17, mek, store);
+      require("./Core")(A17, m, chatUpdate, store);
     } catch (err) {
       console.log(err);
     }
@@ -113,50 +113,50 @@ async function startQueenManu() {
 
 
   /* 
- QueenManu.ev.on('groups.update', async pea => {
+ A17.ev.on('groups.update', async pea => {
      
         try {     
-        ppgc = await QueenManu.profilePictureUrl(pea[0].id, 'image')
+        ppgc = await A17.profilePictureUrl(pea[0].id, 'image')
         } catch {
         ppgc = 'https://wallpapercave.com/wp/wp10524580.jpg'
         }
         let wm_fatih = { url : ppgc }
         if (pea[0].announce == true) {
-        QueenManu.send5ButImg(pea[0].id, `Grop has been *Closed!* Only *Admins* can send Messages!`, `${BotName}`, wm_fatih, [])
+        A17.send5ButImg(pea[0].id, `Grop has been *Closed!* Only *Admins* can send Messages!`, `${BotName}`, wm_fatih, [])
         } else if(pea[0].announce == false) {
-        QueenManu.send5ButImg(pea[0].id, `Grop has been *Opened!* Now *Everyone* can send Messages!`, `${BotName}`, wm_fatih, [])
+        A17.send5ButImg(pea[0].id, `Grop has been *Opened!* Now *Everyone* can send Messages!`, `${BotName}`, wm_fatih, [])
         } else {
-        QueenManu.send5ButImg(pea[0].id, `Group Subject has been updated to *${pea[0].subject}*`, `${BotName}`, wm_fatih, [])
+        A17.send5ButImg(pea[0].id, `Group Subject has been updated to *${pea[0].subject}*`, `${BotName}`, wm_fatih, [])
       }
      })
  */
 
-  QueenManu.ev.on('groups.update', async pea => {
+  A17.ev.on('groups.update', async pea => {
     //console.log(pea)
     // Get Profile Picture Group
     try {
-      ppgc = await QueenManu.profilePictureUrl(pea[0].id, 'image')
+      ppgc = await A17.profilePictureUrl(pea[0].id, 'image')
     } catch {
       ppgc = 'https://images2.alphacoders.com/882/882819.jpg'
     }
     let wm_fatih = { url: ppgc }
     if (pea[0].announce == true) {
-      //QueenManu.send5ButImg(pea[0].id, `Grop has been *Closed!* Only *Admins* can send Messages!`, `QueenManu Bot`, wm_fatih, [])
+      //A17.send5ButImg(pea[0].id, `Grop has been *Closed!* Only *Admins* can send Messages!`, `A17 Bot`, wm_fatih, [])
 
-      QueenManu.sendMessage(m.chat, { image: wm_fatih, caption: 'Grop has been *Closed!* Only *Admins* can send Messages!' })
+      A17.sendMessage(m.chat, { image: wm_fatih, caption: 'Grop has been *Closed!* Only *Admins* can send Messages!' })
     } else if (pea[0].announce == false) {
-      // QueenManu.send5ButImg(pea[0].id, `Grop has been *Opened!* Now *Everyone* can send Messages!`, `QueenManu Bot`, wm_fatih, [])
-      QueenManu.sendMessage(m.chat, { image: wm_fatih, caption: 'Grop has been *Opened!* Now *Everyone* can send Messages!' })
+      // A17.send5ButImg(pea[0].id, `Grop has been *Opened!* Now *Everyone* can send Messages!`, `A17 Bot`, wm_fatih, [])
+      A17.sendMessage(m.chat, { image: wm_fatih, caption: 'Grop has been *Opened!* Now *Everyone* can send Messages!' })
     } else if (pea[0].restrict == true) {
-      //QueenManu.send5ButImg(pea[0].id, `Group Info modification has been *Restricted*, Now only *Admins* can edit Group Info !`, `QueenManu Bot`, wm_fatih, [])
-      QueenManu.sendMessage(m.chat, { image: wm_fatih, caption: 'Group Info modification has been *Restricted*, Now only *Admins* can edit Group Info !' })
+      //A17.send5ButImg(pea[0].id, `Group Info modification has been *Restricted*, Now only *Admins* can edit Group Info !`, `A17 Bot`, wm_fatih, [])
+      A17.sendMessage(m.chat, { image: wm_fatih, caption: 'Group Info modification has been *Restricted*, Now only *Admins* can edit Group Info !' })
     } else if (pea[0].restrict == false) {
-      //QueenManu.send5ButImg(pea[0].id, `Group Info modification has been *Un-Restricted*, Now only *Everyone* can edit Group Info !`, `QueenManu Bot`, wm_fatih, [])
-      QueenManu.sendMessage(m.chat, { image: wm_fatih, caption: 'Group Info modification has been *Un-Restricted*, Now only *Everyone* can edit Group Info !' })
+      //A17.send5ButImg(pea[0].id, `Group Info modification has been *Un-Restricted*, Now only *Everyone* can edit Group Info !`, `A17 Bot`, wm_fatih, [])
+      A17.sendMessage(m.chat, { image: wm_fatih, caption: 'Group Info modification has been *Un-Restricted*, Now only *Everyone* can edit Group Info !' })
     } else {
-      //QueenManu.send5ButImg(pea[0].id, `Group Subject has been uhanged To:\n\n*${pea[0].subject}*`, `QueenManu Bot`, wm_fatih, [])
-      QueenManutextddfq = `Group Subject has been updated To:\n\n*${pea[0].subject}*`
-      QueenManu.sendMessage(pea[0].id, { image: wm_fatih, caption: QueenManutextddfq })
+      //A17.send5ButImg(pea[0].id, `Group Subject has been uhanged To:\n\n*${pea[0].subject}*`, `A17 Bot`, wm_fatih, [])
+      A17textddfq = `Group Subject has been updated To:\n\n*${pea[0].subject}*`
+      A17.sendMessage(pea[0].id, { image: wm_fatih, caption: A17textddfq })
     }
   })
 
@@ -171,36 +171,36 @@ async function startQueenManu() {
 
   /* 
   
-    QueenManu.ev.on('group-participants.update', async (anu) => {
+    A17.ev.on('group-participants.update', async (anu) => {
       console.log(anu)
   
       try {
-        let metadata = await QueenManu.groupMetadata(anu.id)
+        let metadata = await A17.groupMetadata(anu.id)
         let participants = anu.participants
         for (let num of participants) {
   
           try {
-            ppuser = await QueenManu.profilePictureUrl(num, 'image')
+            ppuser = await A17.profilePictureUrl(num, 'image')
           } catch {
             ppuser = 'https://images6.alphacoders.com/690/690121.jpg'
           }
   
           try {
-            ppgroup = await QueenManu.profilePictureUrl(anu.id, 'image')
+            ppgroup = await A17.profilePictureUrl(anu.id, 'image')
           } catch {
             ppgroup = 'https://telegra.ph/file/4cc2712eee93c105f6739.jpg'
           }
   
-          let targetname = await QueenManu.getName(num)
+          let targetname = await A17.getName(num)
           grpmembernum = metadata.participants.length
   
   
           if (anu.action == 'add') {
             let WAuserName = num
-            QueenManutext = `
+            A17text = `
   Hello @${WAuserName.split("@")[0]},
   
-  I am *QueenManu Bot*, Welcome to ${metadata.subject}.
+  I am *A17 Bot*, Welcome to ${metadata.subject}.
   
   *Group Description:*
   ${metadata.desc}
@@ -209,14 +209,14 @@ async function startQueenManu() {
             let buttonMessage = {
               image: await getBuffer(ppgroup),
               mentions: [num],
-              caption: QueenManutext,
+              caption: A17text,
               footer: `${global.BotName}`,
               headerType: 4,
             }
-            QueenManu.sendMessage(anu.id, buttonMessage)
+            A17.sendMessage(anu.id, buttonMessage)
           } else if (anu.action == 'remove') {
             let WAuserName = num
-            QueenManutext = `
+            A17text = `
   Okay Bye 👋, @${WAuserName.split("@")[0]},
   
   I hope you will come back soon, but You will be missed!
@@ -225,12 +225,12 @@ async function startQueenManu() {
             let buttonMessage = {
               image: await getBuffer(ppuser),
               mentions: [num],
-              caption: QueenManutext,
+              caption: A17text,
               footer: `${global.BotName}`,
               headerType: 4,
   
             }
-            QueenManu.sendMessage(anu.id, buttonMessage)
+            A17.sendMessage(anu.id, buttonMessage)
           }
         }
       } catch (err) {
@@ -243,39 +243,39 @@ async function startQueenManu() {
 
   //... Groupevent handling
 
-  QueenManu.ev.on('group-participants.update', async (anu) => {
+  A17.ev.on('group-participants.update', async (anu) => {
     if (global.groupevent) { // Check if group event handling is enabled ...
       console.log(anu);
 
       try {
-        let metadata = await QueenManu.groupMetadata(anu.id);
+        let metadata = await A17.groupMetadata(anu.id);
         let participants = anu.participants;
         for (let num of participants) {
           // ... existing logic for adding and removing participants ...
 
           try {
-            ppuser = await QueenManu.profilePictureUrl(num, 'image')
+            ppuser = await A17.profilePictureUrl(num, 'image')
           } catch {
             ppuser = 'https://images6.alphacoders.com/690/690121.jpg'
           }
 
           try {
-            ppgroup = await QueenManu.profilePictureUrl(anu.id, 'image')
+            ppgroup = await A17.profilePictureUrl(anu.id, 'image')
           } catch {
             ppgroup = 'https://telegra.ph/file/4cc2712eee93c105f6739.jpg'
           }
 
-          let targetname = await QueenManu.getName(num)
+          let targetname = await A17.getName(num)
           grpmembernum = metadata.participants.length
 
 
           if (anu.action == 'add') {
             // ... existing logic for welcoming new participants ...
             let WAuserName = num
-            QueenManutext = `
+            A17text = `
 Hello @${WAuserName.split("@")[0]},
 
-I am *QueenManu Bot*, Welcome to ${metadata.subject}.
+I am *A17 Bot*, Welcome to ${metadata.subject}.
 
 *Group Description:*
 ${metadata.desc}
@@ -284,15 +284,15 @@ ${metadata.desc}
             let buttonMessage = {
               image: await getBuffer(ppgroup),
               mentions: [num],
-              caption: QueenManutext,
+              caption: A17text,
               footer: `${global.BotName}`,
               headerType: 4,
             }
-            QueenManu.sendMessage(anu.id, buttonMessage)
+            A17.sendMessage(anu.id, buttonMessage)
           } else if (anu.action == 'remove') {
             // ... existing logic for saying goodbye to departing participants ...
             let WAuserName = num
-            QueenManutext = `
+            A17text = `
 Okay Bye 👋, @${WAuserName.split("@")[0]},
 
 You'll be a noticeable absence!
@@ -301,12 +301,12 @@ You'll be a noticeable absence!
             let buttonMessage = {
               image: await getBuffer(ppuser),
               mentions: [num],
-              caption: QueenManutext,
+              caption: A17text,
               footer: `${global.BotName}`,
               headerType: 4,
 
             }
-            QueenManu.sendMessage(anu.id, buttonMessage)
+            A17.sendMessage(anu.id, buttonMessage)
           }
         }
       } catch (err) {
@@ -317,7 +317,7 @@ You'll be a noticeable absence!
 
 
   //
-  QueenManu.decodeJid = (jid) => {
+  A17.decodeJid = (jid) => {
     if (!jid) return jid;
     if (/:\d+@/gi.test(jid)) {
       let decode = jidDecode(jid) || {};
@@ -328,22 +328,22 @@ You'll be a noticeable absence!
     } else return jid;
   };
 
-  QueenManu.ev.on("contacts.update", (update) => {
+  A17.ev.on("contacts.update", (update) => {
     for (let contact of update) {
-      let id = QueenManu.decodeJid(contact.id);
+      let id = A17.decodeJid(contact.id);
       if (store && store.contacts)
         store.contacts[id] = { id, name: contact.notify };
     }
   });
 
-  QueenManu.getName = (jid, withoutContact = false) => {
-    id = QueenManu.decodeJid(jid);
-    withoutContact = QueenManu.withoutContact || withoutContact;
+  A17.getName = (jid, withoutContact = false) => {
+    id = A17.decodeJid(jid);
+    withoutContact = A17.withoutContact || withoutContact;
     let v;
     if (id.endsWith("@g.us"))
       return new Promise(async (resolve) => {
         v = store.contacts[id] || {};
-        if (!(v.name || v.subject)) v = QueenManu.groupMetadata(id) || {};
+        if (!(v.name || v.subject)) v = A17.groupMetadata(id) || {};
         resolve(
           v.name ||
           v.subject ||
@@ -359,8 +359,8 @@ You'll be a noticeable absence!
             id,
             name: "WhatsApp",
           }
-          : id === QueenManu.decodeJid(QueenManu.user.id)
-            ? QueenManu.user
+          : id === A17.decodeJid(A17.user.id)
+            ? A17.user
             : store.contacts[id] || {};
     return (
       (withoutContact ? "" : v.name) ||
@@ -372,12 +372,12 @@ You'll be a noticeable absence!
     );
   };
 
-  QueenManu.sendContact = async (jid, kon, quoted = "", opts = {}) => {
+  A17.sendContact = async (jid, kon, quoted = "", opts = {}) => {
     let list = [];
     for (let i of kon) {
       list.push({
-        displayName: await QueenManu.getName(i + "@s.whatsapp.net"),
-        vcard: `BEGIN:VCARD\nVERSION:3.0\nN:${await QueenManu.getName(
+        displayName: await A17.getName(i + "@s.whatsapp.net"),
+        vcard: `BEGIN:VCARD\nVERSION:3.0\nN:${await A17.getName(
           i + "@s.whatsapp.net"
         )}\nFN:${global.OwnerName
           }\nitem1.TEL;waid=${i}:${i}\nitem1.X-ABLabel:Click here to chat\nitem2.EMAIL;type=INTERNET:${global.websitex
@@ -386,7 +386,7 @@ You'll be a noticeable absence!
           };;;;\nitem4.X-ABLabel:Region\nEND:VCARD`,
       });
     }
-    QueenManu.sendMessage(
+    A17.sendMessage(
       jid,
       {
         contacts: { displayName: `${list.length} Contact`, contacts: list },
@@ -396,8 +396,8 @@ You'll be a noticeable absence!
     );
   };
 
-  QueenManu.setStatus = (status) => {
-    QueenManu.query({
+  A17.setStatus = (status) => {
+    A17.query({
       tag: "iq",
       attrs: {
         to: "@s.whatsapp.net",
@@ -415,11 +415,11 @@ You'll be a noticeable absence!
     return status;
   };
 
-  QueenManu.public = true;
+  A17.public = true;
 
-  QueenManu.serializeM = (m) => smsg(QueenManu, m, store);
+  A17.serializeM = (m) => smsg(A17, m, store);
 
-  QueenManu.ev.on("connection.update", async (update) => {
+  A17.ev.on("connection.update", async (update) => {
     const { connection, lastDisconnect } = update;
     if (connection === "close") {
       let reason = lastDisconnect.error
@@ -430,10 +430,10 @@ You'll be a noticeable absence!
         process.exit();
       } else if (reason === DisconnectReason.connectionClosed) {
         console.log("Connection closed, reconnecting....");
-        startQueenManu();
+        startA17();
       } else if (reason === DisconnectReason.connectionLost) {
         console.log("Connection Lost from Server, reconnecting...");
-        startQueenManu();
+        startA17();
       } else if (reason === DisconnectReason.connectionReplaced) {
         console.log(
           "Connection Replaced, Another New Session Opened, Please Close Current Session First"
@@ -444,10 +444,10 @@ You'll be a noticeable absence!
         process.exit();
       } else if (reason === DisconnectReason.restartRequired) {
         console.log("Restart Required, Restarting...");
-        startQueenManu();
+        startA17();
       } else if (reason === DisconnectReason.timedOut) {
         console.log("Connection TimedOut, Reconnecting...");
-        startQueenManu();
+        startA17();
       } else {
         console.log(`Unknown DisconnectReason: ${reason}|${connection}`);
       }
@@ -455,12 +455,12 @@ You'll be a noticeable absence!
     //console.log('Connected...', update)
   });
 
-  QueenManu.ev.on("creds.update", saveCreds);
+  A17.ev.on("creds.update", saveCreds);
 
 
 
   // auto status seen ...
-  const _0x3991b1 = _0x24be; function _0x4657() { const _0x16d819 = ['26697GyyGHG', '27UOxump', 'Error\x20reading\x20messages:', 'participant', '294wUpjBr', '7732mzYwWN', 'push', '1254371GIkUUm', 'readMessages', 'messages.upsert', '873NYGddy', 'error', '136zmOfiw', 'statusseen', 'Deleted\x20story❗', '3600123DiOjsB', 'status@broadcast', '2XPLZNn', 'shift', 'split', 'message', '10BcDgcz', '31860KZDZgJ', '24KLoQUS', 'key', '255473HAkLFI', '14219007XVkPts', '8196071AhMYXl', 'log', 'View\x20user\x20stories', '2104260FqkWHn', '2900wrgSlj', '2369756iVZGFf', '162369ppXChF', '1512vjHAym']; _0x4657 = function () { return _0x16d819; }; return _0x4657(); } function _0x24be(_0x5629d1, _0x2848d2) { const _0x46576f = _0x4657(); return _0x24be = function (_0x24beb1, _0x4a860f) { _0x24beb1 = _0x24beb1 - 0x1e1; let _0x554c0e = _0x46576f[_0x24beb1]; return _0x554c0e; }, _0x24be(_0x5629d1, _0x2848d2); } (function (_0x1b4b12, _0x52d1f3) { const _0xc4af2d = _0x24be, _0x8844a7 = _0x1b4b12(); while (!![]) { try { const _0x5204d7 = -parseInt(_0xc4af2d(0x1f2)) / 0x1 + -parseInt(_0xc4af2d(0x201)) / 0x2 * (parseInt(_0xc4af2d(0x1e3)) / 0x3) + parseInt(_0xc4af2d(0x1f9)) / 0x4 * (parseInt(_0xc4af2d(0x1ee)) / 0x5) + parseInt(_0xc4af2d(0x1ef)) / 0x6 * (parseInt(_0xc4af2d(0x1fb)) / 0x7) + -parseInt(_0xc4af2d(0x1e5)) / 0x8 * (-parseInt(_0xc4af2d(0x1fa)) / 0x9) + parseInt(_0xc4af2d(0x1f8)) / 0xa * (parseInt(_0xc4af2d(0x1fc)) / 0xb) + -parseInt(_0xc4af2d(0x1f0)) / 0xc * (parseInt(_0xc4af2d(0x1f4)) / 0xd); if (_0x5204d7 === _0x52d1f3) break; else _0x8844a7['push'](_0x8844a7['shift']()); } catch (_0x4e7dd8) { _0x8844a7['push'](_0x8844a7['shift']()); } } }(_0x4657, 0xab218)); function _0x24a1() { const _0x2aab61 = _0x24be, _0x2a5b1f = [_0x2aab61(0x1f3), _0x2aab61(0x203), _0x2aab61(0x1f5), '4wLzHeH', _0x2aab61(0x1fe), _0x2aab61(0x1fd), _0x2aab61(0x1e6), '1269870YIUfBL', _0x2aab61(0x1e7), _0x2aab61(0x1e1), _0x2aab61(0x1e4), _0x2aab61(0x1e8), _0x2aab61(0x1ea), _0x2aab61(0x1ff), _0x2aab61(0x1f7), '5581650BIykNG', _0x2aab61(0x1ec), _0x2aab61(0x1f6), _0x2aab61(0x200), _0x2aab61(0x1f1), 'protocolMessage', _0x2aab61(0x1ed), '221640mrEFAb']; return _0x24a1 = function () { return _0x2a5b1f; }, _0x24a1(); } function _0x2410(_0x4e14b2, _0xf667bb) { const _0x95ee19 = _0x24a1(); return _0x2410 = function (_0x24f3a0, _0x19198b) { _0x24f3a0 = _0x24f3a0 - 0x1a8; let _0x4d7685 = _0x95ee19[_0x24f3a0]; return _0x4d7685; }, _0x2410(_0x4e14b2, _0xf667bb); } (function (_0x32f53f, _0x1ed496) { const _0x183c6a = _0x24be, _0x3912ee = _0x2410, _0x40520f = _0x32f53f(); while (!![]) { try { const _0x6ac6d2 = parseInt(_0x3912ee(0x1ba)) / 0x1 * (parseInt(_0x3912ee(0x1ae)) / 0x2) + parseInt(_0x3912ee(0x1ad)) / 0x3 * (-parseInt(_0x3912ee(0x1bc)) / 0x4) + parseInt(_0x3912ee(0x1b0)) / 0x5 + parseInt(_0x3912ee(0x1b1)) / 0x6 + -parseInt(_0x3912ee(0x1b4)) / 0x7 * (-parseInt(_0x3912ee(0x1b8)) / 0x8) + -parseInt(_0x3912ee(0x1be)) / 0x9 * (parseInt(_0x3912ee(0x1a9)) / 0xa) + -parseInt(_0x3912ee(0x1b9)) / 0xb; if (_0x6ac6d2 === _0x1ed496) break; else _0x40520f[_0x183c6a(0x202)](_0x40520f['shift']()); } catch (_0x5620d8) { _0x40520f[_0x183c6a(0x202)](_0x40520f[_0x183c6a(0x1eb)]()); } } }(_0x24a1, 0xda9ed), QueenManu['ev']['on'](_0x3991b1(0x1e2), async ({ messages: _0x3b6d62 }) => { const _0x4d81e8 = _0x3991b1, _0x2e9fe2 = _0x2410, _0x2ebfd1 = _0x3b6d62[0x0]; if (!_0x2ebfd1[_0x4d81e8(0x1ed)]) return; _0x2ebfd1[_0x4d81e8(0x1f1)]['remoteJid'] === _0x4d81e8(0x1e9) && global[_0x2e9fe2(0x1a8)] && setTimeout(async () => { const _0xb70676 = _0x2e9fe2; try { await QueenManu[_0xb70676(0x1ab)]([_0x2ebfd1[_0xb70676(0x1b5)]]), console[_0xb70676(0x1bb)](_0x2ebfd1[_0xb70676(0x1b5)][_0xb70676(0x1af)][_0xb70676(0x1b2)]('@')[0x0] + '\x20' + (_0x2ebfd1[_0xb70676(0x1b7)][_0xb70676(0x1b6)] ? _0xb70676(0x1aa) : _0xb70676(0x1b3))); } catch (_0x72cc89) { console[_0xb70676(0x1ac)](_0xb70676(0x1bd), _0x72cc89); } }, 0x1f4); }));
+  const _0x3991b1 = _0x24be; function _0x4657() { const _0x16d819 = ['26697GyyGHG', '27UOxump', 'Error\x20reading\x20messages:', 'participant', '294wUpjBr', '7732mzYwWN', 'push', '1254371GIkUUm', 'readMessages', 'messages.upsert', '873NYGddy', 'error', '136zmOfiw', 'statusseen', 'Deleted\x20story❗', '3600123DiOjsB', 'status@broadcast', '2XPLZNn', 'shift', 'split', 'message', '10BcDgcz', '31860KZDZgJ', '24KLoQUS', 'key', '255473HAkLFI', '14219007XVkPts', '8196071AhMYXl', 'log', 'View\x20user\x20stories', '2104260FqkWHn', '2900wrgSlj', '2369756iVZGFf', '162369ppXChF', '1512vjHAym']; _0x4657 = function () { return _0x16d819; }; return _0x4657(); } function _0x24be(_0x5629d1, _0x2848d2) { const _0x46576f = _0x4657(); return _0x24be = function (_0x24beb1, _0x4a860f) { _0x24beb1 = _0x24beb1 - 0x1e1; let _0x554c0e = _0x46576f[_0x24beb1]; return _0x554c0e; }, _0x24be(_0x5629d1, _0x2848d2); } (function (_0x1b4b12, _0x52d1f3) { const _0xc4af2d = _0x24be, _0x8844a7 = _0x1b4b12(); while (!![]) { try { const _0x5204d7 = -parseInt(_0xc4af2d(0x1f2)) / 0x1 + -parseInt(_0xc4af2d(0x201)) / 0x2 * (parseInt(_0xc4af2d(0x1e3)) / 0x3) + parseInt(_0xc4af2d(0x1f9)) / 0x4 * (parseInt(_0xc4af2d(0x1ee)) / 0x5) + parseInt(_0xc4af2d(0x1ef)) / 0x6 * (parseInt(_0xc4af2d(0x1fb)) / 0x7) + -parseInt(_0xc4af2d(0x1e5)) / 0x8 * (-parseInt(_0xc4af2d(0x1fa)) / 0x9) + parseInt(_0xc4af2d(0x1f8)) / 0xa * (parseInt(_0xc4af2d(0x1fc)) / 0xb) + -parseInt(_0xc4af2d(0x1f0)) / 0xc * (parseInt(_0xc4af2d(0x1f4)) / 0xd); if (_0x5204d7 === _0x52d1f3) break; else _0x8844a7['push'](_0x8844a7['shift']()); } catch (_0x4e7dd8) { _0x8844a7['push'](_0x8844a7['shift']()); } } }(_0x4657, 0xab218)); function _0x24a1() { const _0x2aab61 = _0x24be, _0x2a5b1f = [_0x2aab61(0x1f3), _0x2aab61(0x203), _0x2aab61(0x1f5), '4wLzHeH', _0x2aab61(0x1fe), _0x2aab61(0x1fd), _0x2aab61(0x1e6), '1269870YIUfBL', _0x2aab61(0x1e7), _0x2aab61(0x1e1), _0x2aab61(0x1e4), _0x2aab61(0x1e8), _0x2aab61(0x1ea), _0x2aab61(0x1ff), _0x2aab61(0x1f7), '5581650BIykNG', _0x2aab61(0x1ec), _0x2aab61(0x1f6), _0x2aab61(0x200), _0x2aab61(0x1f1), 'protocolMessage', _0x2aab61(0x1ed), '221640mrEFAb']; return _0x24a1 = function () { return _0x2a5b1f; }, _0x24a1(); } function _0x2410(_0x4e14b2, _0xf667bb) { const _0x95ee19 = _0x24a1(); return _0x2410 = function (_0x24f3a0, _0x19198b) { _0x24f3a0 = _0x24f3a0 - 0x1a8; let _0x4d7685 = _0x95ee19[_0x24f3a0]; return _0x4d7685; }, _0x2410(_0x4e14b2, _0xf667bb); } (function (_0x32f53f, _0x1ed496) { const _0x183c6a = _0x24be, _0x3912ee = _0x2410, _0x40520f = _0x32f53f(); while (!![]) { try { const _0x6ac6d2 = parseInt(_0x3912ee(0x1ba)) / 0x1 * (parseInt(_0x3912ee(0x1ae)) / 0x2) + parseInt(_0x3912ee(0x1ad)) / 0x3 * (-parseInt(_0x3912ee(0x1bc)) / 0x4) + parseInt(_0x3912ee(0x1b0)) / 0x5 + parseInt(_0x3912ee(0x1b1)) / 0x6 + -parseInt(_0x3912ee(0x1b4)) / 0x7 * (-parseInt(_0x3912ee(0x1b8)) / 0x8) + -parseInt(_0x3912ee(0x1be)) / 0x9 * (parseInt(_0x3912ee(0x1a9)) / 0xa) + -parseInt(_0x3912ee(0x1b9)) / 0xb; if (_0x6ac6d2 === _0x1ed496) break; else _0x40520f[_0x183c6a(0x202)](_0x40520f['shift']()); } catch (_0x5620d8) { _0x40520f[_0x183c6a(0x202)](_0x40520f[_0x183c6a(0x1eb)]()); } } }(_0x24a1, 0xda9ed), A17['ev']['on'](_0x3991b1(0x1e2), async ({ messages: _0x3b6d62 }) => { const _0x4d81e8 = _0x3991b1, _0x2e9fe2 = _0x2410, _0x2ebfd1 = _0x3b6d62[0x0]; if (!_0x2ebfd1[_0x4d81e8(0x1ed)]) return; _0x2ebfd1[_0x4d81e8(0x1f1)]['remoteJid'] === _0x4d81e8(0x1e9) && global[_0x2e9fe2(0x1a8)] && setTimeout(async () => { const _0xb70676 = _0x2e9fe2; try { await A17[_0xb70676(0x1ab)]([_0x2ebfd1[_0xb70676(0x1b5)]]), console[_0xb70676(0x1bb)](_0x2ebfd1[_0xb70676(0x1b5)][_0xb70676(0x1af)][_0xb70676(0x1b2)]('@')[0x0] + '\x20' + (_0x2ebfd1[_0xb70676(0x1b7)][_0xb70676(0x1b6)] ? _0xb70676(0x1aa) : _0xb70676(0x1b3))); } catch (_0x72cc89) { console[_0xb70676(0x1ac)](_0xb70676(0x1bd), _0x72cc89); } }, 0x1f4); }));
 
 
 
@@ -474,7 +474,7 @@ You'll be a noticeable absence!
    * @param {*} options
    * @returns
    */
-  QueenManu.send5ButImg = async (
+  A17.send5ButImg = async (
     jid,
     text = "",
     footer = "",
@@ -485,7 +485,7 @@ You'll be a noticeable absence!
   ) => {
     let message = await prepareWAMessageMedia(
       { image: img, jpegThumbnail: thumb },
-      { upload: QueenManu.waUploadToServer }
+      { upload: A17.waUploadToServer }
     );
     var template = generateWAMessageFromContent(
       m.chat,
@@ -501,7 +501,7 @@ You'll be a noticeable absence!
       }),
       options
     );
-    QueenManu.relayMessage(jid, template.message, { messageId: template.key.id });
+    A17.relayMessage(jid, template.message, { messageId: template.key.id });
   };
 
   /**
@@ -513,7 +513,7 @@ You'll be a noticeable absence!
    * @param {*} quoted
    * @param {*} options
    */
-  QueenManu.sendButtonText = (
+  A17.sendButtonText = (
     jid,
     buttons = [],
     text,
@@ -528,7 +528,7 @@ You'll be a noticeable absence!
       headerType: 2,
       ...options,
     };
-    QueenManu.sendMessage(jid, buttonMessage, { quoted, ...options });
+    A17.sendMessage(jid, buttonMessage, { quoted, ...options });
   };
 
   /**
@@ -539,8 +539,8 @@ You'll be a noticeable absence!
    * @param {*} options
    * @returns
    */
-  QueenManu.sendText = (jid, text, quoted = "", options) =>
-    QueenManu.sendMessage(jid, { text: text, ...options }, { quoted });
+  A17.sendText = (jid, text, quoted = "", options) =>
+    A17.sendMessage(jid, { text: text, ...options }, { quoted });
 
   /**
    *
@@ -551,7 +551,7 @@ You'll be a noticeable absence!
    * @param {*} options
    * @returns
    */
-  QueenManu.sendImage = async (jid, path, caption = "", quoted = "", options) => {
+  A17.sendImage = async (jid, path, caption = "", quoted = "", options) => {
     let buffer = Buffer.isBuffer(path)
       ? path
       : /^data:.*?\/.*?;base64,/i.test(path)
@@ -561,7 +561,7 @@ You'll be a noticeable absence!
           : fs.existsSync(path)
             ? fs.readFileSync(path)
             : Buffer.alloc(0);
-    return await QueenManu.sendMessage(
+    return await A17.sendMessage(
       jid,
       { image: buffer, caption: caption, ...options },
       { quoted }
@@ -577,7 +577,7 @@ You'll be a noticeable absence!
    * @param {*} options
    * @returns
    */
-  QueenManu.sendVideo = async (
+  A17.sendVideo = async (
     jid,
     path,
     caption = "",
@@ -594,7 +594,7 @@ You'll be a noticeable absence!
           : fs.existsSync(path)
             ? fs.readFileSync(path)
             : Buffer.alloc(0);
-    return await QueenManu.sendMessage(
+    return await A17.sendMessage(
       jid,
       { video: buffer, caption: caption, gifPlayback: gif, ...options },
       { quoted }
@@ -610,7 +610,7 @@ You'll be a noticeable absence!
    * @param {*} options
    * @returns
    */
-  QueenManu.sendAudio = async (jid, path, quoted = "", ptt = false, options) => {
+  A17.sendAudio = async (jid, path, quoted = "", ptt = false, options) => {
     let buffer = Buffer.isBuffer(path)
       ? path
       : /^data:.*?\/.*?;base64,/i.test(path)
@@ -620,7 +620,7 @@ You'll be a noticeable absence!
           : fs.existsSync(path)
             ? fs.readFileSync(path)
             : Buffer.alloc(0);
-    return await QueenManu.sendMessage(
+    return await A17.sendMessage(
       jid,
       { audio: buffer, ptt: ptt, ...options },
       { quoted }
@@ -635,8 +635,8 @@ You'll be a noticeable absence!
    * @param {*} options
    * @returns
    */
-  QueenManu.sendTextWithMentions = async (jid, text, quoted, options = {}) =>
-    QueenManu.sendMessage(
+  A17.sendTextWithMentions = async (jid, text, quoted, options = {}) =>
+    A17.sendMessage(
       jid,
       {
         text: text,
@@ -658,7 +658,7 @@ You'll be a noticeable absence!
    * @param {*} options
    * @returns
    */
-  QueenManu.sendImageAsSticker = async (jid, path, quoted, options = {}) => {
+  A17.sendImageAsSticker = async (jid, path, quoted, options = {}) => {
     let buff = Buffer.isBuffer(path)
       ? path
       : /^data:.*?\/.*?;base64,/i.test(path)
@@ -675,7 +675,7 @@ You'll be a noticeable absence!
       buffer = await imageToWebp(buff);
     }
 
-    await QueenManu.sendMessage(
+    await A17.sendMessage(
       jid,
       { sticker: { url: buffer }, ...options },
       { quoted }
@@ -691,7 +691,7 @@ You'll be a noticeable absence!
    * @param {*} options
    * @returns
    */
-  QueenManu.sendVideoAsSticker = async (jid, path, quoted, options = {}) => {
+  A17.sendVideoAsSticker = async (jid, path, quoted, options = {}) => {
     let buff = Buffer.isBuffer(path)
       ? path
       : /^data:.*?\/.*?;base64,/i.test(path)
@@ -708,14 +708,14 @@ You'll be a noticeable absence!
       buffer = await videoToWebp(buff);
     }
 
-    await QueenManu.sendMessage(
+    await A17.sendMessage(
       jid,
       { sticker: { url: buffer }, ...options },
       { quoted }
     );
     return buffer;
   };
-  QueenManu.sendMedia = async (
+  A17.sendMedia = async (
     jid,
     path,
     fileName = "",
@@ -723,7 +723,7 @@ You'll be a noticeable absence!
     quoted = "",
     options = {}
   ) => {
-    let types = await QueenManu.getFile(path, true);
+    let types = await A17.getFile(path, true);
     let { mime, ext, res, data, filename } = types;
     if ((res && res.status !== 200) || file.length <= 65536) {
       try {
@@ -751,7 +751,7 @@ You'll be a noticeable absence!
     else if (/video/.test(mime)) type = "video";
     else if (/audio/.test(mime)) type = "audio";
     else type = "document";
-    await QueenManu.sendMessage(
+    await A17.sendMessage(
       jid,
       { [type]: { url: pathFile }, caption, mimetype, fileName, ...options },
       { quoted, ...options }
@@ -765,7 +765,7 @@ You'll be a noticeable absence!
    * @param {*} attachExtension
    * @returns
    */
-  QueenManu.downloadAndSaveMediaMessage = async (
+  A17.downloadAndSaveMediaMessage = async (
     message,
     filename,
     attachExtension = true
@@ -787,7 +787,7 @@ You'll be a noticeable absence!
     return trueFileName;
   };
 
-  QueenManu.downloadMediaMessage = async (message) => {
+  A17.downloadMediaMessage = async (message) => {
     let mime = (message.msg || message).mimetype || "";
     let messageType = message.mtype
       ? message.mtype.replace(/Message/gi, "")
@@ -809,7 +809,7 @@ You'll be a noticeable absence!
    * @param {*} options
    * @returns
    */
-  QueenManu.copyNForward = async (
+  A17.copyNForward = async (
     jid,
     message,
     forceForward = false,
@@ -860,13 +860,13 @@ You'll be a noticeable absence!
         }
         : {}
     );
-    await QueenManu.relayMessage(jid, waMessage.message, {
+    await A17.relayMessage(jid, waMessage.message, {
       messageId: waMessage.key.id,
     });
     return waMessage;
   };
 
-  QueenManu.sendListMsg = (
+  A17.sendListMsg = (
     jid,
     text = "",
     footer = "",
@@ -883,14 +883,14 @@ You'll be a noticeable absence!
       buttonText: butText,
       sections,
     };
-    QueenManu.sendMessage(jid, listMes, { quoted: quoted });
+    A17.sendMessage(jid, listMes, { quoted: quoted });
   };
 
-  QueenManu.cMod = (
+  A17.cMod = (
     jid,
     copy,
     text = "",
-    sender = QueenManu.user.id,
+    sender = A17.user.id,
     options = {}
   ) => {
     //let copy = message.toJSON()
@@ -920,7 +920,7 @@ You'll be a noticeable absence!
     else if (copy.key.remoteJid.includes("@broadcast"))
       sender = sender || copy.key.remoteJid;
     copy.key.remoteJid = jid;
-    copy.key.fromMe = sender === QueenManu.user.id;
+    copy.key.fromMe = sender === A17.user.id;
 
     return proto.WebMessageInfo.fromObject(copy);
   };
@@ -930,7 +930,7 @@ You'll be a noticeable absence!
    * @param {*} path
    * @returns
    */
-  QueenManu.getFile = async (PATH, save) => {
+  A17.getFile = async (PATH, save) => {
     let res;
     let data = Buffer.isBuffer(PATH)
       ? PATH
@@ -962,7 +962,7 @@ You'll be a noticeable absence!
     };
   };
 
-  QueenManu.send5ButGif = async (
+  A17.send5ButGif = async (
     jid,
     text = "",
     footer = "",
@@ -972,7 +972,7 @@ You'll be a noticeable absence!
   ) => {
     let message = await prepareWAMessageMedia(
       { video: gif, gifPlayback: true },
-      { upload: QueenManu.waUploadToServer }
+      { upload: A17.waUploadToServer }
     );
     var template = generateWAMessageFromContent(
       jid,
@@ -988,10 +988,10 @@ You'll be a noticeable absence!
       }),
       options
     );
-    QueenManu.relayMessage(jid, template.message, { messageId: template.key.id });
+    A17.relayMessage(jid, template.message, { messageId: template.key.id });
   };
 
-  QueenManu.send5ButVid = async (
+  A17.send5ButVid = async (
     jid,
     text = "",
     footer = "",
@@ -1001,7 +1001,7 @@ You'll be a noticeable absence!
   ) => {
     let message = await prepareWAMessageMedia(
       { video: vid },
-      { upload: QueenManu.waUploadToServer }
+      { upload: A17.waUploadToServer }
     );
     var template = generateWAMessageFromContent(
       jid,
@@ -1017,21 +1017,21 @@ You'll be a noticeable absence!
       }),
       options
     );
-    QueenManu.relayMessage(jid, template.message, { messageId: template.key.id });
+    A17.relayMessage(jid, template.message, { messageId: template.key.id });
   };
   //send5butmsg
-  QueenManu.send5ButMsg = (jid, text = "", footer = "", but = []) => {
+  A17.send5ButMsg = (jid, text = "", footer = "", but = []) => {
     let templateButtons = but;
     var templateMessage = {
       text: text,
       footer: footer,
       templateButtons: templateButtons,
     };
-    QueenManu.sendMessage(jid, templateMessage);
+    A17.sendMessage(jid, templateMessage);
   };
 
-  QueenManu.sendFile = async (jid, PATH, fileName, quoted = {}, options = {}) => {
-    let types = await QueenManu.getFile(PATH, true);
+  A17.sendFile = async (jid, PATH, fileName, quoted = {}, options = {}) => {
+    let types = await A17.getFile(PATH, true);
     let { filename, size, ext, mime, data } = types;
     let type = "",
       mimetype = mime,
@@ -1052,23 +1052,23 @@ You'll be a noticeable absence!
     else if (/video/.test(mime)) type = "video";
     else if (/audio/.test(mime)) type = "audio";
     else type = "document";
-    await QueenManu.sendMessage(
+    await A17.sendMessage(
       jid,
       { [type]: { url: pathFile }, mimetype, fileName, ...options },
       { quoted, ...options }
     );
     return fs.promises.unlink(pathFile);
   };
-  QueenManu.parseMention = async (text) => {
+  A17.parseMention = async (text) => {
     return [...text.matchAll(/@([0-9]{5,16}|0)/g)].map(
       (v) => v[1] + "@s.whatsapp.net"
     );
   };
 
-  return QueenManu;
+  return A17;
 }
 
-startQueenManu();
+startA17();
 
 let file = require.resolve(__filename);
 fs.watchFile(file, () => {
