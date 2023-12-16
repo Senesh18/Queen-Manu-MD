@@ -65,7 +65,7 @@ async function startQueenManu() {
   console.log(color('\nHello, I am Senuwa, the main Developer of this bot.\n\nThanks for using: QueenManu Bot.🙃❤️', 'aqua'))
   console.log(color('\nYou can follow me on GitHub: Senesh18', 'aqua'))
 
-  const { state, saveCreds } = await useMultiFileAuthState("./QueenManu-SESSION");
+  const { state, saveCreds } = await useMultiFileAuthState("./Queen Manu-SESSION");
   const QueenManu = QueenManuConnect({
     logger: pino({ level: "silent" }),
     printQRInTerminal: true,
