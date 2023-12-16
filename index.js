@@ -1,6 +1,6 @@
 require("./config.js");
 const {
-  default: Queen ManuConnect,
+  default: QueenManuConnect,
   useMultiFileAuthState,
   DisconnectReason,
   fetchLatestBaileysVersion,
