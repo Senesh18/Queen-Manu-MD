@@ -1,8 +1,8 @@
 {
   "name": "CYNER-PANDA-MD",
   "description": "whatsapp md bot build with nodejs",
-  "repository": "https://github.com/DGXeon/CheemsBot-MD8",
-  "logo": "https://telegra.ph/%F0%9D%90%82%F0%9D%90%98%F0%9D%90%81%F0%9D%9C%A9%F0%9D%90%91%F0%9D%90%8F%F0%9D%9C%9F%F0%9D%90%8D%F0%9D%90%83%F0%9D%90%80%F0%9D%90%8C%F0%9D%90%83%F0%9D%90%95-12-14",
+  "repository": "https://github.com/Senesh18/Queen-Manu-MD",
+  "logo": "https://github.com/Senesh18/Queen-Manu-MD",
   "keywords": ["nodejs", "bot", "whatsapp bot", "whatsapp automation", "multi device"],
   "buildpacks": [
     {
