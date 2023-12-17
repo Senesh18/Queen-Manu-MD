@@ -1,18 +1,19 @@
+
 {
-  "name": "CYNER-PANDA-MD",
-  "description": "whatsapp md bot build with nodejs",
-  "repository": "https://github.com/DGXeon/CheemsBot-MD8",
-  "logo": "https://telegra.ph/%F0%9D%90%82%F0%9D%90%98%F0%9D%90%81%F0%9D%9C%A9%F0%9D%90%91%F0%9D%90%8F%F0%9D%9C%9F%F0%9D%90%8D%F0%9D%90%83%F0%9D%90%80%F0%9D%90%8C%F0%9D%90%83%F0%9D%90%95-12-14",
-  "keywords": ["nodejs", "bot", "whatsapp bot", "whatsapp automation", "multi device"],
-  "buildpacks": [
-    {
-      "url": "heroku/nodejs"
+    "name": "BelugaBot-MD",
+    "description": "A whatsApp bot based on Baileysjs linrary (Ts+Js) with Multi Device support",
+    "repository": "https://github.com/ahil15/BelugaBot-MD",
+    "logo": "https://i.ibb.co/qYqxrt8/20231010-232658.png",
+    "keywords": ["nodejs", "bot", "whatsapp bot", "whatsapp automation", "multi device"],
+    "buildpacks": [
+      {
+        "url": "heroku/nodejs"
     },
     {
       "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
     },
     {
       "url": "https://github.com/clhuang/heroku-buildpack-webp-binaries.git"
-    }
-  ]
+          }
+     ]
 }
