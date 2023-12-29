@@ -51,7 +51,7 @@ const store = makeInMemoryStore({
 async function startA17() {
   console.log(
     color(
-      figlet.textSync("CYBER-PANDA-MD", {
+      figlet.textSync("A17 Bot MD", {
         font: "Standard",
         horizontalLayout: "default",
         vertivalLayout: "default",
@@ -65,11 +65,11 @@ async function startA17() {
   console.log(color('\nHello, I am Kai, the main Developer of this bot.\n\nThanks for using: A17 Bot.', 'aqua'))
   console.log(color('\nYou can follow me on GitHub: Kai0071', 'aqua'))
 
-  const { state, saveCreds } = await useMultiFileAuthState("./SESSION");
+  const { state, saveCreds } = await useMultiFileAuthState("./A17-SESSION");
   const A17 = A17Connect({
     logger: pino({ level: "silent" }),
     printQRInTerminal: true,
-    browser: ["CYBER-PANDA-MD", "Safari", "3.O"],
+    browser: ["A17 Bot", "Safari", "3.O"],
     auth: state,
   });
 
@@ -275,7 +275,7 @@ async function startA17() {
             A17text = `
 Hello @${WAuserName.split("@")[0]},
 
-I am *🦋 │𝐂𝐘𝐁𝜩𝐑│𝐏𝜟𝐍𝐃𝐀│𝐌𝐃│𝐕➂ 🦋*, Welcome to ${metadata.subject}.
+I am *A17 Bot*, Welcome to ${metadata.subject}.
 
 *Group Description:*
 ${metadata.desc}
